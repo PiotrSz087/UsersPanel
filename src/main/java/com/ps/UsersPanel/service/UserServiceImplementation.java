@@ -1,4 +1,4 @@
-package com.ps.UsersPanel.dao;
+package com.ps.UsersPanel.service;
 
 import com.ps.UsersPanel.entity.User;
 import com.ps.UsersPanel.repository.UserRepo;
@@ -9,12 +9,12 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Repository
-public class UserDaoImplementation implements UserDao {
+public class UserServiceImplementation implements UserService {
 
     private final UserRepo userRepo;
 
     @Autowired
-    public UserDaoImplementation(UserRepo userRepo) {
+    public UserServiceImplementation(UserRepo userRepo) {
         this.userRepo = userRepo;
     }
 
