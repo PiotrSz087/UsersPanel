@@ -1,23 +1,86 @@
-table {
-    width: 750px;
-    border-collapse: collapse;
-    margin:50px auto;
-    box-shadow: 3px 3px 10px 5px #000;
-
+body {
+    background: url('/img/nature.jpg');
 }
 
-tr:nth-of-type(odd) {
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 35px;
+    box-shadow: 0 15px 10px rgba(0, 0, 0, 0.7);
+}
+
+tr {
     background: #eee;
 }
-th {
-    background: #3498db;
+
+th, button {
+    background: rgb(5, 20, 5);
     color: white;
     font-weight: bold;
 }
+
 td, th {
     padding: 10px;
     border: 1px solid #ccc;
 
     text-align: left;
     font-size: 18px;
+}
+
+.box {
+
+    position: relative;
+    width: 60%;
+    background-color: rgba(242, 242, 242, 0.5);
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    padding: 2em 1.5em;
+    color: rgba(0, 0, 0, .8);
+    text-shadow: 0 1px 0 #fff;
+    line-height: 1.5;
+    margin: 60px auto;
+}
+
+button {
+    padding: 10px;
+    width: 200px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+h3 {
+    text-align: center;
 }

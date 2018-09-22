@@ -23,4 +23,10 @@ public class UserServiceImplementation implements UserService {
     public List<User> getUserList() {
         return userRepo.findAll();
     }
+
+    @Override
+    @Transactional
+    public void save(User user) {
+        userRepo.save(user);
+    }
 }
