@@ -42,4 +42,10 @@ public class UserController {
         System.out.println(user.getFirstName());
         return "update-list";
     }
+
+    @GetMapping("/delete")
+    public String deleteUser(@RequestParam("id") long id) {
+        userService.deleteUser(id);
+        return "redirect:/user/list";
+    }
 }

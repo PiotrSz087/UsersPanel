@@ -24,8 +24,8 @@
             <td th:text="${usr.lastName}"></td>
             <td th:text="${usr.email}"></td>
             <td>
-                <!--<button th:onclick="|myFun('${usr.id}');|">button</button>-->
-                <a id="myLink" th:href="@{/user/showUpdate(id=${usr.id})}">Update</a>
+                <a th:href="@{/user/showUpdate(id=${usr.id})}">Update</a>
+                | <a th:href="@{/user/delete(id=${usr.id})}">Delete</a>
             </td>
         </tr>
     </table>

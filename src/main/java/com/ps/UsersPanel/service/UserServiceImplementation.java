@@ -39,4 +39,9 @@ public class UserServiceImplementation implements UserService {
     public User getUser(long id) {
         return userRepo.getOne(id);
     }
+
+    @Override
+    public void deleteUser(long id) {
+        userRepo.deleteById(id);
+    }
 }
