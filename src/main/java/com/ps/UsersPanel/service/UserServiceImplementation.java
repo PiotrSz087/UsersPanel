@@ -44,4 +44,10 @@ public class UserServiceImplementation implements UserService {
     public void deleteUser(long id) {
         userRepo.deleteById(id);
     }
+
+    @Override
+    public List<User> search(String searchName) {
+        return userRepo.findAllByFirstName(searchName);
+    }
+
 }

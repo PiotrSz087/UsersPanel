@@ -1,7 +1,7 @@
 package com.ps.UsersPanel.controller;
 
-import com.ps.UsersPanel.service.UserService;
 import com.ps.UsersPanel.entity.User;
+import com.ps.UsersPanel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -47,5 +47,14 @@ public class UserController {
     public String deleteUser(@RequestParam("id") long id) {
         userService.deleteUser(id);
         return "redirect:/user/list";
+    }
+
+    @PostMapping("/search")
+    public String searchUser(@RequestParam(value = "searchName") String searchName, Model model){
+        User user = new User();
+        List<User> userList = userService.search(searchName);
+        model.addAttribute("usr", user);
+        model.addAttribute("users", userList);
+        return "user-list";
     }
 }

@@ -1,6 +1,7 @@
 package com.ps.UsersPanel.service;
 
 import com.ps.UsersPanel.entity.User;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,4 +15,7 @@ public interface UserService {
     User getUser(long id);
 
     void deleteUser(long id);
+
+    List<User> search(String searchName);
+
 }
