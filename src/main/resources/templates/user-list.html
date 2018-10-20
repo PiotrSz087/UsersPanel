@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
+    <script src="/js/scriptForModal.js"></script>
+    <title>Title</title>
+</head>
+<body>
+<div class="box">
+    <!--List of users-->
+    <h3>User List</h3>
+    <table>
+        <tr>
+            <th>First name</th>
+            <th>Last name</th>
+            <th>Email</th>
+            <th>Actions</th>
+        </tr>
+        <tr th:each="usr : ${page.content}">
+            <td th:text="${usr.firstName}"></td>
+            <td th:text="${usr.lastName}"></td>
+            <td th:text="${usr.email}"></td>
+            <td>
+                <a th:href="@{/user/showUpdate(id=${usr.id})}">Update</a>
+                | <a th:href="@{/user/delete(id=${usr.id})}">Delete</a>
+            </td>
+        </tr>
+        <tr th:if="${page.totalElements < 1}">
+            <td colspan="4"> No Users Available</td>
+        </tr>
+    </table>
+
+    <button onclick="modalFunction()">Add User</button>
+
+    <!--Search user-->
+    <form th:action="@{search}" method="post">
+        <input type="text" name="searchName" placeholder="Type name to find user.">
+        <button>Find</button>
+    </form>
+
+    <!--Pagination-->
+    <div class="pagination">
+        <span th:if="${page.hasPrevious()}">
+            <a th:href="@{/user/list(page=${page.number-1})}"><<</a>
+        </span>
+
+        <span th:each="i: ${#numbers.sequence(0, page.totalPages - 1)}">
+            <a th:href="@{/user/list(page=${i})}" th:text="${i}"></a>
+        </span>
+
+        <span th:if="${page.hasNext()}">
+            <a th:href="@{/user/list(page=${page.number+1})}">>></a>
+        </span>
+    </div>
+</div>
+
+<!--Add user modal form-->
+<div id="myModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form th:action="@{processForm}" method="post" th:object="${usr}">
+            <input type="text" th:field="*{firstName}" placeholder="Type your name."><br>
+            <input type="text" th:field="*{lastName}" placeholder="Type your surname."><br>
+            <input type="text" th:field="*{email}" placeholder="Type your email."><br>
+            <button class="form-button">Submit</button>
+        </form>
+    </div>
+</div>
+</body>
+</html>
