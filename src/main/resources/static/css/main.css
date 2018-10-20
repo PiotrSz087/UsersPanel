@@ -49,6 +49,7 @@ button {
 .modal {
     display: none;
     position: fixed;
+    padding-top: 100px;
     z-index: 1;
     left: 0;
     top: 0;
@@ -63,8 +64,10 @@ button {
     background-color: #fefefe;
     margin: 15% auto;
     padding: 20px;
+    position: relative;
+    outline: 0;
     border: 1px solid #888;
-    width: 80%;
+    width: 600px;
 }
 
 .close {
@@ -83,4 +86,27 @@ button {
 
 h3 {
     text-align: center;
+}
+
+.pagination {
+    display: inline-block;
+    margin-left: 45%;
+}
+
+.pagination a {
+    color: black;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color .3s;
+
+}
+
+.pagination .selected{
+    background-color: #4CAF50;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
 }

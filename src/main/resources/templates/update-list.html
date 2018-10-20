@@ -2,15 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="/css/main.css">
     <title>Title</title>
 </head>
 <body>
-<form th:action="@{processForm}" method="post" th:object="${usr}">
-    <input hidden type="text" th:field="*{id}">
-    <input type="text" th:field="*{firstName}"  placeholder="Type your name."><br>
-    <input type="text" th:field="*{lastName}" placeholder="Type your surname."><br>
-    <input type="text" th:field="*{email}" placeholder="Type your email."><br>
-    <button>Submit</button>
-</form>
+<div class="box">
+    <form th:action="@{processForm}" method="post" th:object="${usr}">
+        <input hidden type="text" th:field="*{id}">
+        <input type="text" th:field="*{firstName}" placeholder="Type your name."><br>
+        <input type="text" th:field="*{lastName}" placeholder="Type your surname."><br>
+        <input type="text" th:field="*{email}" placeholder="Type your email."><br>
+        <button>Submit</button>
+    </form>
+</div>
 </body>
 </html>

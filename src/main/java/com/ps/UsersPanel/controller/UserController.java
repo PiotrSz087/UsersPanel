@@ -1,31 +1,39 @@
 package com.ps.UsersPanel.controller;
 
 import com.ps.UsersPanel.entity.User;
+import com.ps.UsersPanel.repository.UserRepo;
 import com.ps.UsersPanel.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
     private UserService userService;
+    private UserRepo userRepo;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserRepo userRepo) {
         this.userService = userService;
+        this.userRepo = userRepo;
     }
 
     @GetMapping("/list")
-    public String listOfUsers(Model model) {
+    public String listOfUsers(@RequestParam(defaultValue = "0") int page,  Model model) {
         User user = new User();
-        List<User> userList = userService.getUserList();
         model.addAttribute("usr", user);
-        model.addAttribute("users", userList);
+        Page<User> userPage = userRepo.findAll(PageRequest.of(page, 10, Sort.by(Sort.Direction.ASC, "firstName")));
+        model.addAttribute("page", userPage);
         return "user-list";
     }
 
@@ -37,9 +45,8 @@ public class UserController {
 
     @GetMapping("/showUpdate")
     public String updateForm(@RequestParam("id") long id, Model model) {
-        User user = userService.getUser(id);
+        Optional<User> user = userService.getUser(id);
         model.addAttribute("usr", user);
-        System.out.println(user.getFirstName());
         return "update-list";
     }
 
@@ -50,11 +57,11 @@ public class UserController {
     }
 
     @PostMapping("/search")
-    public String searchUser(@RequestParam(value = "searchName") String searchName, Model model){
+    public String searchUser(@RequestParam(value = "searchName") String searchName, @PageableDefault(size = 10) Pageable pageable, Model model){
         User user = new User();
-        List<User> userList = userService.search(searchName);
+        Page<User> userList = userService.search(searchName, pageable);
         model.addAttribute("usr", user);
-        model.addAttribute("users", userList);
+        model.addAttribute("page", userList);
         return "user-list";
     }
 }
